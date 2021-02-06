@@ -3,10 +3,6 @@
 # Import regex module
 import re
 
-# Elevate privelages for sudo access.
-from elevate import elevate
-elevate(graphical=False)
-
 # Figure out if the user wants to add or remove a site from the host file
 user_input = input(
     "Would you like to add or remove a site from your host file? ")
