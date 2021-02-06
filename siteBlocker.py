@@ -3,7 +3,22 @@
 # Import regex module
 import re
 
-# Figure out if the user wants to add or remove a site from the host file
+active = []
+# Print all sites, currently being blocked. 
+def list_active():
+    with open('/etc/hosts', 'r') as file:
+        lines = file.readlines()
+        print("The folliwng sites are currently in your host file:")
+        for line in lines:
+            s = re.search('127.0.0.1 https://www.(.+?).com', line)
+            if s:
+                found = s.group(1)
+                print(found)
+
+list_active()
+        
+
+#Figure out if the user wants to add or remove a site from the host file
 user_input = input(
     "Would you like to add or remove a site from your host file? ")
 
@@ -13,10 +28,11 @@ site_name = input("What is the name of the site ")
 class SiteBlocker:
     """ A model for our site blocker program """
 
+
     def __init__(self):
         self.user_input = user_input
 
-# Function to add site from host file.
+# Function to add site from host file.        
     def add(self):
         # Open host file, and check to see if string is already there.
         with open('/etc/hosts', 'r') as file:
