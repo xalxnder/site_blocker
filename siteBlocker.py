@@ -19,9 +19,9 @@ list_active()
 
 #Figure out if the user wants to add or remove a site from the host file
 user_input = input(
-    "Would you like to add or remove a site from your host file? ")
+    "Would you like to add or remove a site from your host file? \nMust enter \"Add\" or  \"Remove\":\n").lower()
 
-site_name = input("What is the name of the site ")
+site_name = input("What is the name of the site ").lower()
 
 
 class SiteBlocker:
