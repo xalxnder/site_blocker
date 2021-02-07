@@ -2,6 +2,7 @@
 # Author: Xavier Alexander
 # Import regex module
 import re
+import os
 active = True
 
 # Print all sites, currently being blocked. 
@@ -63,6 +64,7 @@ class SiteBlocker:
 
 while active:
     #Figure out if the user wants to add or remove a site from the host file
+    os.system('clear')
     user_input = input(
         "Would you like to add or remove a site from your host file? \nMust enter \"Add\" or  \"Remove\":\n").lower()
     site_blocker = SiteBlocker()
