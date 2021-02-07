@@ -2,6 +2,7 @@
 # Author: Xavier Alexander
 # Import regex module
 import re
+active = True
 
 # Print all sites, currently being blocked. 
 def list_active():
@@ -9,30 +10,21 @@ def list_active():
         lines = file.readlines()
         print("The folliwng sites are currently in your host file:")
         for line in lines:
-            s = re.search('127.0.0.1 https://www.(.+?).com', line)
+            s = re.search('127.0.0.1\thttps://www.(.+?).com', line)
             if s:
                 found = s.group(1)
                 print(found)
 
 list_active()
         
-
-#Figure out if the user wants to add or remove a site from the host file
-user_input = input(
-    "Would you like to add or remove a site from your host file? \nMust enter \"Add\" or  \"Remove\":\n").lower()
-
-site_name = input("What is the name of the site ").lower()
-
-
 class SiteBlocker:
     """ A model for our site blocker program """
-
-
     def __init__(self):
         self.user_input = user_input
 
 # Function to add site from host file.        
     def add(self):
+        site_name = input("What is the name of the site ").lower()
         # Open host file, and check to see if string is already there.
         with open('/etc/hosts', 'r') as file:
             lines = file.read()
@@ -67,11 +59,18 @@ class SiteBlocker:
             print(file.read())
 
 
-site_blocker = SiteBlocker()
 
-if user_input == 'add':
-    site_blocker.add()
-elif user_input == 'remove':
-    site_blocker.remove()
-else:
-    print('You did not make an approptiate choice. Exiting..')
+
+while active:
+    #Figure out if the user wants to add or remove a site from the host file
+    user_input = input(
+        "Would you like to add or remove a site from your host file? \nMust enter \"Add\" or  \"Remove\":\n").lower()
+    site_blocker = SiteBlocker()
+    if user_input == 'add':
+        site_blocker.add()
+    elif user_input == 'remove':
+        site_blocker.remove()
+    else:
+        print('You did not make an approptiate choice. Exiting..')
+        active = False
+
