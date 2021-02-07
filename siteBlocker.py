@@ -3,7 +3,6 @@
 # Import regex module
 import re
 
-active = []
 # Print all sites, currently being blocked. 
 def list_active():
     with open('/etc/hosts', 'r') as file:
