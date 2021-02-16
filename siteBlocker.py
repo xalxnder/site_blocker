@@ -16,7 +16,6 @@ def list_active():
                 found = s.group(1)
                 print(found)
 
-list_active()
         
 class SiteBlocker:
     """ A model for our site blocker program """
@@ -44,6 +43,7 @@ class SiteBlocker:
 
     # Function to remove site from host file.
     def remove(self):
+        site_name = input("What is the name of the site ").lower()
         with open('/etc/hosts', 'r+') as file:
             new_output = []
             # pattern = re.compile(r'\bworldstar\b')
@@ -65,6 +65,7 @@ class SiteBlocker:
 while active:
     #Figure out if the user wants to add or remove a site from the host file
     os.system('clear')
+    list_active()
     user_input = input(
         "Would you like to add or remove a site from your host file? \nMust enter \"Add\" or  \"Remove\":\n").lower()
     site_blocker = SiteBlocker()
